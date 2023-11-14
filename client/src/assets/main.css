@@ -1,81 +1,45 @@
-@import './base.css';
+/*
+Title: Main
+Description: This file is the mains vars, uikit, reset and comportement of my portfolio website css
+*/
+
+/* RESET */
+
+*, ::after, ::before{
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box
+}
+
+a{
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+/* Vars */
+
+:root{
+
+    /* Spacing */
+
+    --page-side-padding: 2rem;
+}
+
+/* Main comportement & UI Kit */
+
+:root{
+    font-family: monospace;
+    font-size:  1.1em;
+}
 
 #app{
-  min-height: calc(100vh + 120px);
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  scroll-behavior: smooth;
-}
-
-::-webkit-scrollbar{
-  width: 10px;
-  height: 10px;
-  background-color: var(--color-background);
-}
-
-::-webkit-scrollbar-thumb{
-  background-color: var(--color-dark);
-}
-
-::-webkit-scrollbar-thumb:hover{
-  background-color: var(--color-text);
-}
-
-.cta{
-  padding: 16px 24px;
-  border-radius: 150px;
-  border: 1.5px solid var(--color-text);
-  color: var(--color-text);
-  font-family: 'Jost', sans-serif;
-  font-size: 16px;
-  font-weight: 300;
-  background-image: radial-gradient(circle, transparent 1%, rgba(53,53,53,1) 1%);
-  background-position: center;
-  background-size: 10000%;
-  transition: 
-    background-size .5s ease-in-out,
-    background-color .5s ease-in-out .07s,
-    color .5s ease-in-out;
-  cursor: pointer;
-  background-color: transparent;
-}
-
-.cta:hover{
-  background-size: 0%;
-  background-color: #353535;
-  color: var(--color-background-accent);
-}
-
-.cta.large{
-  font-size: 20px;
-  padding: 20px 50px;
-}
-
-section {
-  min-height: 85vh;
-  max-width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.sep{
-  display: block;
-  background-color: var(--color-dark);
-  height: 3px;
-  width: 800px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.sep::after, .sep::before{
-  content:"";
-  display: block;
-  --scale: 6px;
-  height: var(--scale);
-  width: var(--scale);
-  background-color: var(--color-dark);
-  transform: rotate(45deg);
+    display: grid;
+    grid-template-rows: 75px 1fr 75px;
+    min-height: 100vh;
+    place-items: center;
 }
