@@ -1,115 +1,114 @@
-<script setup>
+<script>
 import { RouterLink, RouterView } from 'vue-router'
+
+export default {
+  data(){
+    return {
+      menuToggle: "close"
+    }
+  },
+  methods: {
+    toggleMenu(){
+      this.menuToggle = this.menuToggle == "close" ? "open" : "close"
+    }
+  }
+}
+
+
+
 </script>
 
 <template>
-  <header>
-    <nav id="navbar">
-      <div class="logo wraper">
-        <RouterLink to="/"><img src="@/assets/images/logo.png" alt="TL (Logo)" id="website-logo" title="Page d'accueil"></RouterLink> 
-      </div>
-      <div class="nav-items wraper">
-        <ul class="nav-items-container">
-          <li class="nav-item"><a href="#">Acceuil</a></li>
-          <li class="nav-item"><a href="#a-propos">À propos</a></li>
-          <li class="nav-item"><a href="#projets">Mes projets</a></li>
-          <li class="nav-item btn-like"><a href="#contacter-moi">Me contacter</a></li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <RouterView />
-  <footer>
-    <div class="wraper">
-      <p>© Théo Lesage -</p>
-      <RouterLink to="/conditions-generales-d-utilisation">Conditions générales d'utilisation</RouterLink>
+  <nav id="app-navigation">
+    <div class="logo-container">
+      >_ theolesage
     </div>
+    <div id="navitems-container" @click="toggleMenu" :class="menuToggle">
+      <div id="menu-toggle">
+        <span>Menu</span>
+        <span class="circle"></span>
+      </div>
+      <div class="menu-wraper">
+        <a href="/" class="navitem">Home</a>
+        <a href="/about" class="navitem">About</a>
+        <a href="/work" class="navitem">Work</a>
+        <a href="/contact" class="navitem">Contact</a>
+      </div>
+    </div>
+  </nav>
+  <div id="app-content">
+    <RouterView />
+  </div>
+  <footer id="app-footer">
+    <p>Théo Lesage. All rights reserved.</p>
   </footer>
 </template>
 
 <style scoped>
-header{
-  position: relative;
-}
-#navbar{
+#app-navigation{
   display: flex;
   justify-content: space-between;
+  width: 100%;
+  padding: 0 var(--page-side-padding);
+  overflow-x: hidden;
+}
+
+#navitems-container{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
   align-items: center;
-  position: relative;
-  inset: 0 0 auto 0;
-  background-color: var(--color-background-accent);
-  height: 95px;
-  padding-inline: 60px;
-  box-shadow: 0 2px 50px #13074a18;
+  gap: 2rem;
 }
-#website-logo{
-  height: 45px;
-}
-.nav-items-container{
+
+#menu-toggle{
   display: flex;
   justify-content: center;
-  gap: 15px;
   align-items: center;
-}
-.nav-item{
-  padding: 16px 24px;
-  border-bottom: 1px solid transparent;
-  font-weight: 300;
-  font-size: 19px;
+  gap: 1rem;
   cursor: pointer;
-  user-select:none;
-  transition: border-color .5s ease-in-out;
+  border: 2px solid transparent;
+  padding: .5rem;
+  transition: border-color .2s ease;
+  background-color: #fff;
+  z-index: 1;
+}
+#menu-toggle:hover{
+  border: 2px solid black;
 }
 
-.nav-item.btn-like{
-  border-radius: 50rem;
-  border: 1px solid var(--color-text);
-  padding: 5px 40px;
-  background-image: radial-gradient(circle, transparent 1%, rgba(53,53,53,1) 1%);
-  background-position: center;
-  background-size: 10000%;
-  transition: 
-    background-size .5s ease-in-out,
-    background-color .5s ease-in-out .07s,
-    color .5s ease-in-out;
+#menu-toggle .circle{
+  --size: 25px;
+  display: block;
+  height: var(--size);
+  aspect-ratio: 1;
+  border: calc(var(--size) / 5) solid black;
+  border-radius: var(--page-side-padding);
+  transition: background-color .2s ease;
+}
+#menu-toggle:hover .circle{
+  background-color: black;
 }
 
-.nav-item.btn-like:hover{
-  background-size: 0%;
-  background-color: #353535;
-  color: var(--color-background-accent);
+#navitems-container .menu-wraper{
+  display: flex;
+  gap: 2rem;
+  transform: translateX(120%);
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+
+  transition: transform .5s ease, opacity .5s ease;
 }
 
-.nav-item.btn-like a{
-  transition: color .5s ease-in-out .05s;
+#navitems-container.open .menu-wraper{
+  
+  transform: translateX(0%);
+  opacity: 1;
+  pointer-events: all;
+  user-select: all;
+
+  transition: transform .5s ease, opacity .2s ease;
 }
 
-.nav-item.btn-like:hover a{
-  color: var(--color-background-accent);
-}
-
-.nav-item:hover{
-  border-bottom: 1px solid var(--color-text);
-}
-footer{
-  display: grid;
-  place-items: center;
-  min-width: 100%;
-  background-color: var(--color-text);
-}
-footer .wraper{
-  height: 120px;
-  display: grid;
-  place-items: center;
-  grid-auto-flow: column;
-  grid-auto-columns: max-content;
-  gap: 5px;
-}
-
-footer p, footer a{
-  text-decoration: none;
-  font-weight: 300;
-  font-size: 18px;
-  color: var(--color-background);
-}
 </style>
